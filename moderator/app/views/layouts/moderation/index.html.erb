@@ -1,0 +1,24 @@
+<h1>Moderation Prediction</h1>
+
+<%= form_with url: predict_moderation_path, method: :post do |form| %>
+  <div>
+    <%= form.label :text, "Type here:" %><br>
+    <%= form.text_area :text, rows: 4 %>
+  </div>
+
+  <div>
+    <%= form.label :language, "Langage:" %><br>
+    <%= form.text_field :language %>
+  </div>
+
+  <div>
+    <%= form.submit "Prediction" %>
+  </div>
+<% end %>
+
+<% if @prediction.present? %>
+  <div>
+    <h2>Prediction:</h2>
+    <%= @prediction ? "Accepted" : "Rejected" %>
+  </div>
+<% end %>
