@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   root 'moderation#index'
-  post 'predict_moderation', to: 'moderated#attributes_to_moderate'
+  post 'predict_moderation', to: 'moderation#predict'
 end

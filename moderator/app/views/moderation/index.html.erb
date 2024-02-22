@@ -1,13 +1,13 @@
-<h1>Moderation Prediction</h1>
-
 <%= form_with url: predict_moderation_path, method: :post do |form| %>
   <div>
-    <%= form.label :text, "Type here:" %><br>
-    <%= form.text_area :text, rows: 4 %>
+    <%= form.label :texts, "Texts to evaluate:" %><br>
+    <% 3.times do |i| %>
+      <%= form.text_area "texts[#{i}][text]", rows: 4, placeholder: "Enter text" %>
+    <% end %>
   </div>
 
   <div>
-    <%= form.label :language, "Langage:" %><br>
+    <%= form.label :language, "Language:" %><br>
     <%= form.text_field :language %>
   </div>
 
@@ -16,9 +16,14 @@
   </div>
 <% end %>
 
-<% if @prediction.present? %>
+<% if flash[:prediction].present? %>
   <div>
     <h2>Prediction:</h2>
-    <%= @prediction ? "Accepted" : "Rejected" %>
+    <% if flash[:prediction].to_f >= 0.5 %>
+      <p>The content is Accepted with a probability of <%= flash[:prediction] %>.</p>
+    <% else %>
+      <p>The content is Rejected with a probability of <%= flash[:prediction] %>.</p>
+    <% end %>
   </div>
 <% end %>
+
