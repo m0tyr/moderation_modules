@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_02_22_172817) do
   create_table "moderation_models", force: :cascade do |t|
-    t.text "content"
+    t.string "content"
     t.string "language"
     t.boolean "is_accepted"
     t.datetime "created_at", null: false

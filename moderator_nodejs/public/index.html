@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moderation</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div id="content">
+    <h1>Edit Paragraphs</h1>
+    <form id="editForm" method="post" action="/predict">
+      <div>
+        <label for="paragraph1">Paragraph 1:</label><br>
+        <textarea id="paragraph1" name="paragraph1" rows="4" cols="50"></textarea>
+      </div>
+      <div>
+        <label for="paragraph2">Paragraph 2:</label><br>
+        <textarea id="paragraph2" name="paragraph2" rows="4" cols="50"></textarea>
+      </div>
+      <div>
+        <label for="paragraph3">Paragraph 3:</label><br>
+        <textarea id="paragraph3" name="paragraph3" rows="4" cols="50"></textarea>
+      </div>
+      <button type="submit">Predict</button>
+      <button type="submit" formaction="/score">Score</button> 
+
+    </form>
+  </div>
+</body>
+</html>

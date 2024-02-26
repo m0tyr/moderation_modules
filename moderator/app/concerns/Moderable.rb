@@ -45,6 +45,6 @@ module Moderable
 
 
   def attributes_to_moderate
-    raise NotImplementedError, 'attributes_to_moderate doit être implementée dans la classe'
+    raise NotImplementedError, 'attributes_to_moderate Needs to be implemented in the class'
   end
 end
