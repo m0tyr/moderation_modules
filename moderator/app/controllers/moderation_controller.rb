@@ -1,6 +1,8 @@
 class ModerationController < ApplicationController
   def index
   end
+  def content_moderation
+  end
   
   def predict
     texts = params[:texts].values.map { |text| text[:text] } || []
