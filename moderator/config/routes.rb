@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'moderation#index'
   post 'predict_moderation', to: 'moderation#predict'
-  get 'content_moderation', to: 'moderation#content_moderation'
+  get 'content_moderation', to: 'moderation#content_moderation'  
+  post 'content_moderation', to: 'moderation#content_moderation'
 
 end

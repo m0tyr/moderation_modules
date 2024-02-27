@@ -1,9 +1,15 @@
-<h1>Get Content Moderation</h1>
+<h1>Get each content Prediction of  Moderation</h1>
 
-<%= form_tag content_moderation_path, method: :get, id: "moderation_form" do %>
+<%= form_tag content_moderation_path, method: :post, id: "moderation_form" do %>
   <section id="section1">
     <h2>Submit first paragraph</h2>
-    <p contenteditable="true" id="section1_content">This is the first paragraph. You can modify this text.</p>
+    <% content = flash["content_0"] %>
+    <% if content.present? %>
+      <%= text_field_tag "section1_content", content, id: "section1_content", class: "beautiful-input" %>
+    <% else %>
+      <%= text_field_tag "section1_content", "", id: "section1_content", placeholder: "Write here", class: "beautiful-input" %>
+    <% end %>
+
     <% prediction = flash["prediction_0"] %>
     <% if prediction.present? %>
       <div>
@@ -11,62 +17,67 @@
         <% if prediction.to_f >= 0.5 %>
           <p>The content is Rejected with a probability of <%= prediction %>.</p>
         <% else %>
-          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
+          <p>The content is Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>
-    <%= hidden_field_tag "section1_content", '', id: "section1_hidden_field" %>
   </section>
 
   <section id="section2">
-    <h2>Submit first paragraph</h2>
-    <p contenteditable="true" id="section2_content">This is the second paragraph. You can modify this text.</p>
+    <h2>Submit second paragraph</h2>
+    <% content = flash["content_1"] %>
+    <% if content.present? %>
+      <%= text_field_tag "section2_content", content, id: "section2_content", class: "beautiful-input" %>
+    <% else %>
+      <%= text_field_tag "section2_content", "", id: "section2_content", placeholder: "Write here", class: "beautiful-input" %>
+    <% end %>
+
     <% prediction = flash["prediction_1"] %>
     <% if prediction.present? %>
       <div>
         <h2>Prediction:</h2>
         <% if prediction.to_f >= 0.5 %>
-             <p>The content is Rejected with a probability of <%= prediction %>.</p>
+          <p>The content is Rejected with a probability of <%= prediction %>.</p>
         <% else %>
-          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
+          <p>The content is Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>
-    <%= hidden_field_tag "section2_content", '', id: "section2_hidden_field" %>
   </section>
 
   <section id="section3">
-    <h2>Submit first paragraph</h2>
-    <p contenteditable="true" id="section3_content">This is the third paragraph. You can modify this text.</p>
+    <h2>Submit third paragraph</h2>
+    <% content = flash["content_2"] %>
+    <% if content.present? %>
+      <%= text_field_tag "section3_content", content, id: "section3_content", class: "beautiful-input" %>
+    <% else %>
+      <%= text_field_tag "section3_content", "", id: "section3_content", placeholder: "Write here", class: "beautiful-input" %>
+    <% end %>
+
     <% prediction = flash["prediction_2"] %>
     <% if prediction.present? %>
       <div>
         <h2>Prediction:</h2>
         <% if prediction.to_f >= 0.5 %>
-           <p>The content is Rejected with a probability of <%= prediction %>.</p>
+          <p>The content is Rejected with a probability of <%= prediction %>.</p>
         <% else %>
-          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
+          <p>The content is Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>
-    <%= hidden_field_tag "section3_content", '', id: "section3_hidden_field" %>
   </section>
-
+  
   <%= submit_tag "Tester la validité des textes" %>
+  <%= link_to "Réessayer", root_path %>
 <% end %>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('moderation_form');
-    const paragraphs = form.querySelectorAll('p[contenteditable=true]');
+  <style>
+    .beautiful-input {
+      border: 2px solid black; 
+      padding: 10px; 
+      margin: 5px;
+      width: 100%;
+      background-color: white; 
+    }
+  </style>
 
-    form.addEventListener('submit', function(event) {
-      paragraphs.forEach(function(paragraph, index) {
-        const hiddenField = document.getElementById(`section${index + 1}_hidden_field`);
-        hiddenField.value = paragraph.innerText;
-      });
-
-      document.getElementById('submit_button').disabled = true;
-    });
-  });
-</script>
