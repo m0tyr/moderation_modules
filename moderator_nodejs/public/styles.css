@@ -5,7 +5,30 @@ body {
     background-color: #393737;
     color: #333;
   }
+  a{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+  }
+  .accepted {
+    color: green;
+  }
 
+  .rejected {
+    color: red;
+  }
+  a:hover{
+    background-color: #0056b3;
+
+  }
   #content {
     width: 80%;
     margin: 20px auto;

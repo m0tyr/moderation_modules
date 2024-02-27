@@ -2,16 +2,16 @@
 
 <%= form_tag content_moderation_path, method: :get, id: "moderation_form" do %>
   <section id="section1">
-    <h2>Section 1</h2>
+    <h2>Submit first paragraph</h2>
     <p contenteditable="true" id="section1_content">This is the first paragraph. You can modify this text.</p>
     <% prediction = flash["prediction_0"] %>
     <% if prediction.present? %>
       <div>
         <h2>Prediction:</h2>
         <% if prediction.to_f >= 0.5 %>
-          <p>The content is Accepted with a probability of <%= prediction %>.</p>
-        <% else %>
           <p>The content is Rejected with a probability of <%= prediction %>.</p>
+        <% else %>
+          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>
@@ -19,16 +19,16 @@
   </section>
 
   <section id="section2">
-    <h2>Section 2</h2>
+    <h2>Submit first paragraph</h2>
     <p contenteditable="true" id="section2_content">This is the second paragraph. You can modify this text.</p>
     <% prediction = flash["prediction_1"] %>
     <% if prediction.present? %>
       <div>
         <h2>Prediction:</h2>
         <% if prediction.to_f >= 0.5 %>
-          <p>The content is Accepted with a probability of <%= prediction %>.</p>
+             <p>The content is Rejected with a probability of <%= prediction %>.</p>
         <% else %>
-          <p>The content is Rejected with a probability of <%= prediction %>.</p>
+          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>
@@ -36,16 +36,16 @@
   </section>
 
   <section id="section3">
-    <h2>Section 3</h2>
+    <h2>Submit first paragraph</h2>
     <p contenteditable="true" id="section3_content">This is the third paragraph. You can modify this text.</p>
     <% prediction = flash["prediction_2"] %>
     <% if prediction.present? %>
       <div>
         <h2>Prediction:</h2>
         <% if prediction.to_f >= 0.5 %>
-          <p>The content is Accepted with a probability of <%= prediction %>.</p>
+           <p>The content is Rejected with a probability of <%= prediction %>.</p>
         <% else %>
-          <p>The content is Rejected with a probability of <%= prediction %>.</p>
+          <p>The content is  Rejected or maybe not with a probability of <%= prediction %>.</p>
         <% end %>
       </div>
     <% end %>

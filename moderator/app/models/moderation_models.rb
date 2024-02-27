@@ -6,7 +6,7 @@ class ModerationModels < ApplicationRecord
   end
   
   def moderate_attributes(text, language)
-    language = "fr"
+    language = "fr-FR"
     is_accepted = moderating(text, language)
     { text: text, language: language, prediction: is_accepted }
   end

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Moderation</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
   <div id="content">
-    <h1>Edit Paragraphs</h1>
-    <form id="editForm" method="post" action="/predict">
+    <h1>Test API Logora</h1>
+    <form id="editForm" method="post" action="/predict" onsubmit="return AnimationLoading()">
       <div>
         <label for="paragraph1">Paragraph 1:</label><br>
         <textarea id="paragraph1" name="paragraph1" rows="4" cols="50"></textarea>
@@ -20,10 +22,37 @@
         <label for="paragraph3">Paragraph 3:</label><br>
         <textarea id="paragraph3" name="paragraph3" rows="4" cols="50"></textarea>
       </div>
-      <button type="submit">Predict</button>
-      <button type="submit" formaction="/score">Score</button> 
+      <button type="submit" id="predictButton">Predict</button>
+      <button type="submit" id="scoreButton" formaction="/score">Score</button>
 
     </form>
+    <div id="loadingSpinner" style="display: none;">Loading...</div>
+
   </div>
+  <script>
+    function AnimationLoading() {
+      document.getElementById('predictButton').disabled = true;
+      document.getElementById('scoreButton').disabled = true;
+      document.getElementById('loadingSpinner').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('editForm').submit();
+      }, 2000); 
+      return false;
+    }
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    function displayMessage() {
+      const message = getQueryParam('message');
+      if (message) {
+        alert(decodeURIComponent(message));
+      }
+    }
+
+    window.onload = displayMessage;
+  </script>
 </body>
+
 </html>

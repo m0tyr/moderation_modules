@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Scores</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+    button[disabled]:hover {
+        cursor: not-allowed;
+    }
+
+    .accepted {
+        color: green;
+    }
+
+    .rejected {
+        color: red;
+    }
+</style>
+
+<body>
+    <div id="content">
+        <h1>Scores</h1>
+        <form id="editForm" method="post" action="/predict">
+            <% api_responses.forEach((response, index)=> { %>
+                <% for (const key in response) { %>
+                    <div>
+                        <label>For <h3 name="paragraph<%= index %>">
+                                <%= key %>
+                            </h3></label><br>
+                        <p><strong>Score</strong> : <%= JSON.stringify(response[key]) %>
+                        </p>
+                        <p>This content should be <strong
+                                class="<%= parseFloat(response[key]) > 5 ? 'accepted' : 'rejected' %>">
+                                <% if (parseFloat(response[key])> 5) { %>
+                                    Accepted
+                                    <% } else { %>
+                                        Rejected
+                                        <% } %>
+                            </strong></p>
+                    </div>
+                    <% } %>
+                        <% }) %>
+
+                            <input type="hidden" name="paragraph1" id="paragraph1" value="">
+                            <input type="hidden" name="paragraph2" id="paragraph2" value="">
+                            <input type="hidden" name="paragraph3" id="paragraph3" value="">
+
+                            <button type="submit" id="predictButton" onclick="selectParagraphs()">Predict</button>
+                            <button type="submit" id="scoreButton" formaction="/score" disabled>Score</button>
+
+        </form>
+        <div id="loadingSpinner" style="display: none;">Loading...</div>
+
+
+    </div>
+    <div id="content">
+        <a href="/">Home</a>
+    </div>
+
+    <script>
+         function AnimationLoading() {
+            document.getElementById('predictButton').disabled = true;
+            document.getElementById('scoreButton').disabled = true;
+            document.getElementById('loadingSpinner').style.display = 'block';
+        }
+        function selectParagraphs() {
+            AnimationLoading()
+            const paragraphs = document.querySelectorAll('h3[name^="paragraph"]');
+
+            let index = 1;
+            paragraphs.forEach(paragraph => {
+                const cleaned = paragraph.innerText.replace(/\r?\n|\r/g, '');
+
+                document.getElementById('paragraph' + index).value = cleaned;
+                index++;
+            });
+            document.getElementById('editForm').submit();
+        }
+    </script>
+</body>
+
+</html>
